@@ -59,8 +59,8 @@ def registration_view(request):
             token = Token.objects.create(user=account)
             data['token'] = token.key
         else:
-            data = serializer.errors
-        return Response(data)
+            return Response (data = serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data, status=status.HTTP_201_CREATED)
 
 
 class ObtainAuthTokenView(APIView):
